@@ -1,6 +1,7 @@
 package hr.fipu.knjiznica.dto;
 
 import jakarta.validation.constraints.*;
+
 public class BookRequest {
 
     @NotBlank(message = "Naslov knjige je obavezan.")
@@ -17,6 +18,7 @@ public class BookRequest {
 
     @NotBlank(message = "ISBN je obavezan.")
     @Size(max = 20, message = "ISBN moze imati najvise 20 znakova.")
+    @Pattern(regexp = "^[0-9-]+$", message = "ISBN smije sadrzavati samo brojeve i crtice.")
     private String isbn;
 
     @NotNull(message = "Godina izdavanja je obavezna.")

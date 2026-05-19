@@ -1,7 +1,9 @@
 package hr.fipu.knjiznica.controller;
 
+import hr.fipu.knjiznica.dto.BookRequest;
 import hr.fipu.knjiznica.model.Book;
 import hr.fipu.knjiznica.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,12 +29,28 @@ public class BookController {
     }
 
     @PostMapping
-    public Book create(@RequestBody Book book) {
+    public Book create(@Valid @RequestBody BookRequest request) {
+        Book book = new Book(
+                request.getTitle(),
+                request.getAuthor(),
+                request.getGenre(),
+                request.getIsbn(),
+                request.getPublishedYear()
+        );
+
         return bookService.create(book);
     }
 
     @PutMapping("/{id}")
-    public Book update(@PathVariable Integer id, @RequestBody Book book) {
+    public Book update(@PathVariable Integer id, @Valid @RequestBody BookRequest request) {
+        Book book = new Book(
+                request.getTitle(),
+                request.getAuthor(),
+                request.getGenre(),
+                request.getIsbn(),
+                request.getPublishedYear()
+        );
+
         return bookService.update(id, book);
     }
 

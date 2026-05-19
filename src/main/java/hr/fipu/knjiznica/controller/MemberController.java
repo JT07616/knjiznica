@@ -1,7 +1,9 @@
 package hr.fipu.knjiznica.controller;
 
+import hr.fipu.knjiznica.dto.MemberRequest;
 import hr.fipu.knjiznica.model.Member;
 import hr.fipu.knjiznica.service.MemberService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,12 +29,26 @@ public class MemberController {
     }
 
     @PostMapping
-    public Member create(@RequestBody Member member) {
+    public Member create(@Valid @RequestBody MemberRequest request) {
+        Member member = new Member(
+                request.getFirstName(),
+                request.getLastName(),
+                request.getEmail(),
+                request.getPhone()
+        );
+
         return memberService.create(member);
     }
 
     @PutMapping("/{id}")
-    public Member update(@PathVariable Integer id, @RequestBody Member member) {
+    public Member update(@PathVariable Integer id, @Valid @RequestBody MemberRequest request) {
+        Member member = new Member(
+                request.getFirstName(),
+                request.getLastName(),
+                request.getEmail(),
+                request.getPhone()
+        );
+
         return memberService.update(id, member);
     }
 

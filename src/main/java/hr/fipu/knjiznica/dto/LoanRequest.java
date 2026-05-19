@@ -5,9 +5,11 @@ import jakarta.validation.constraints.*;
 public class LoanRequest {
 
     @NotNull(message = "ID knjige je obavezan.")
+    @Positive(message = "ID knjige mora biti pozitivan broj.")
     private Integer bookId;
 
     @NotNull(message = "ID clana je obavezan.")
+    @Positive(message = "ID clana mora biti pozitivan broj.")
     private Integer memberId;
 
     public Integer getBookId() {

@@ -24,7 +24,7 @@ public class DefaultMemberService implements MemberService {
     @Override
     public Member findById(Integer id) {
         return memberRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Član nije pronađen."));
+                .orElseThrow(() -> new RuntimeException("Clan nije pronaden."));
     }
 
     @Override
@@ -56,6 +56,6 @@ public class DefaultMemberService implements MemberService {
     @Override
     public Member findByEmail(String email) {
         return memberRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Član s tim emailom nije pronađen."));
+                .orElseThrow(() -> new RuntimeException("Clan s tim emailom nije pronaden."));
     }
 }

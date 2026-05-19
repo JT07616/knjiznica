@@ -1,7 +1,9 @@
 package hr.fipu.knjiznica.controller;
 
+import hr.fipu.knjiznica.dto.LoanRequest;
 import hr.fipu.knjiznica.model.Loan;
 import hr.fipu.knjiznica.service.LoanService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +29,8 @@ public class LoanController {
     }
 
     @PostMapping
-    public Loan create(@RequestParam Integer bookId, @RequestParam Integer memberId) {
-        return loanService.create(bookId, memberId);
+    public Loan create(@Valid @RequestBody LoanRequest request) {
+        return loanService.create(request.getBookId(), request.getMemberId());
     }
 
     @PutMapping("/{id}/return")

@@ -24,7 +24,7 @@ public class DefaultBookService implements BookService {
     @Override
     public Book findById(Integer id) {
         return bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Knjiga nije pronađena."));
+                .orElseThrow(() -> new RuntimeException("Knjiga nije pronadjena."));
     }
 
     @Override
@@ -43,7 +43,7 @@ public class DefaultBookService implements BookService {
         existingBook.setGenre(book.getGenre());
         existingBook.setIsbn(book.getIsbn());
         existingBook.setPublishedYear(book.getPublishedYear());
-        existingBook.setAvailable(book.isAvailable());
+
 
         return bookRepository.save(existingBook);
     }
