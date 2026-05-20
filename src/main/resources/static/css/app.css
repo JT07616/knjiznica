@@ -37,3 +37,12 @@ th, td {
 .is-invalid {
     border: 2px solid #b00020;
 }
+
+form div {
+    margin-bottom: 0.5rem;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${formTitle}">Forma</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: main-nav}"></div>
+
+<h1 th:text="${formTitle}">Forma</h1>
+
+<form th:action="@{${formAction}}" th:object="${bookForm}" method="post">
+  <div class="alert error" th:if="${#fields.hasAnyErrors()}">
+    <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Greska</p>
+  </div>
+
+  <div>
+    <label>Naslov</label>
+    <input type="text" th:field="*{title}" th:errorclass="is-invalid">
+    <p class="field-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+      Greska
+    </p>
+  </div>
+
+  <div>
+    <label>Autor</label>
+    <input type="text" th:field="*{author}" th:errorclass="is-invalid">
+    <p class="field-error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">
+      Greska
+    </p>
+  </div>
+
+  <div>
+    <label>Zanr</label>
+    <input type="text" th:field="*{genre}" th:errorclass="is-invalid">
+    <p class="field-error" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">
+      Greska
+    </p>
+  </div>
+
+  <div>
+    <label>ISBN</label>
+    <input type="text" th:field="*{isbn}" th:errorclass="is-invalid">
+    <p class="field-error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">
+      Greska
+    </p>
+  </div>
+
+  <div>
+    <label>Godina izdavanja</label>
+    <input type="number" th:field="*{publishedYear}" th:errorclass="is-invalid">
+    <p class="field-error" th:if="${#fields.hasErrors('publishedYear')}" th:errors="*{publishedYear}">
+      Greska
+    </p>
+  </div>
+
+  <button type="submit">Spremi</button>
+</form>
+
+<p><a th:href="@{/books}">Povratak na popis</a></p>
+</body>
+</html>
