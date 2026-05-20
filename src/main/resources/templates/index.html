@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Knjiznica</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: main-nav}"></div>
+
+<h1>Knjiznica</h1>
+
+<p>Web aplikacija za upravljanje knjigama, članovima i posudbama.</p>
+
+<ul>
+    <li><a th:href="@{/books}">Popis knjiga</a></li>
+</ul>
+</body>
+</html>
