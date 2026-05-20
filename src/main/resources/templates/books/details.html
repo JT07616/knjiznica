@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalji knjige</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: main-nav}"></div>
+
+<h1>Detalji knjige</h1>
+
+<p><strong>ID:</strong> <span th:text="${book.id}">1</span></p>
+<p><strong>Naslov:</strong> <span th:text="${book.title}">Naslov</span></p>
+<p><strong>Autor:</strong> <span th:text="${book.author}">Autor</span></p>
+<p><strong>Zanr:</strong> <span th:text="${book.genre}">Zanr</span></p>
+<p><strong>ISBN:</strong> <span th:text="${book.isbn}">ISBN</span></p>
+<p><strong>Godina:</strong> <span th:text="${book.publishedYear}">2000</span></p>
+<p><strong>Dostupna:</strong> <span th:text="${book.available} ? 'Da' : 'Ne'">Da</span></p>
+
+<p>
+  <a th:href="@{/books/{id}/edit(id=${book.id})}">Uredi</a>
+  <a th:href="@{/books}">Povratak na popis</a>
+</p>
+</body>
+</html>
