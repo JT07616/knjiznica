@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Knjige</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: main-nav}"></div>
+<div th:replace="~{fragments/layout :: flash-message}"></div>
+
+<h1>Popis knjiga</h1>
+
+<p><a th:href="@{/books/new}">Dodaj novu knjigu</a></p>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Naslov</th>
+        <th>Autor</th>
+        <th>Zanr</th>
+        <th>ISBN</th>
+        <th>Godina</th>
+        <th>Dostupna</th>
+        <th>Akcije</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">1</td>
+        <td th:text="${book.title}">Naslov</td>
+        <td th:text="${book.author}">Autor</td>
+        <td th:text="${book.genre}">Zanr</td>
+        <td th:text="${book.isbn}">ISBN</td>
+        <td th:text="${book.publishedYear}">2000</td>
+        <td th:text="${book.available} ? 'Da' : 'Ne'">Da</td>
+        <td>
+            <a th:href="@{/books/{id}(id=${book.id})}">Detalji</a>
+            <a th:href="@{/books/{id}/edit(id=${book.id})}">Uredi</a>
+            <form th:action="@{/books/{id}/delete(id=${book.id})}" method="post" style="display:inline;">
+                <button type="submit">Obrisi</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
