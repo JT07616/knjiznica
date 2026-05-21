@@ -46,3 +46,12 @@ label {
     display: inline-block;
     width: 150px;
 }
+
+.search-form {
+    margin-bottom: 1rem;
+}
+
+.search-form input,
+.search-form button {
+    margin-right: 0.25rem;
+}

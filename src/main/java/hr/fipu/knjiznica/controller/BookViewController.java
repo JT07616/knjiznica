@@ -20,8 +20,14 @@ public class BookViewController {
     }
 
     @GetMapping("/books")
-    public String list(Model model) {
-        model.addAttribute("books", bookService.findAll());
+    public String list(@RequestParam(required = false) String title, Model model) {
+        if (title == null || title.isBlank()) {
+            model.addAttribute("books", bookService.findAll());
+        } else {
+            model.addAttribute("books", bookService.searchByTitle(title));
+        }
+
+        model.addAttribute("title", title);
         return "books/list";
     }
 
