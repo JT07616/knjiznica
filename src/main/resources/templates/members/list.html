@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Clanovi</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: main-nav}"></div>
+<div th:replace="~{fragments/layout :: flash-message}"></div>
+
+<h1>Popis clanova</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Ime</th>
+    <th>Prezime</th>
+    <th>Email</th>
+    <th>Telefon</th>
+    <th>Datum uclanjenja</th>
+    <th>Akcije</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="member : ${members}">
+    <td th:text="${member.id}">1</td>
+    <td th:text="${member.firstName}">Ime</td>
+    <td th:text="${member.lastName}">Prezime</td>
+    <td th:text="${member.email}">email@example.com</td>
+    <td th:text="${member.phone}">Telefon</td>
+    <td th:text="${member.joinedAt}">2026-01-01</td>
+    <td>
+      <a th:href="@{/members/{id}(id=${member.id})}">Detalji</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
