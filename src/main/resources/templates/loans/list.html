@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Posudbe</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: main-nav}"></div>
+<div th:replace="~{fragments/layout :: flash-message}"></div>
+
+<h1>Popis posudbi</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Knjiga</th>
+        <th>Clan</th>
+        <th>Datum posudbe</th>
+        <th>Rok vracanja</th>
+        <th>Datum vracanja</th>
+        <th>Status</th>
+        <th>Akcije</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="loan : ${loans}">
+        <td th:text="${loan.id}">1</td>
+        <td th:text="${loan.book.title}">Naslov knjige</td>
+        <td th:text="|${loan.member.firstName} ${loan.member.lastName}|">Ime Prezime</td>
+        <td th:text="${loan.loanDate}">2026-01-01</td>
+        <td th:text="${loan.dueDate}">2026-01-15</td>
+        <td th:text="${loan.returnDate != null ? loan.returnDate : '-'}">-</td>
+        <td th:text="${loan.status}">ACTIVE</td>
+        <td>
+            <a th:href="@{/loans/{id}(id=${loan.id})}">Detalji</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

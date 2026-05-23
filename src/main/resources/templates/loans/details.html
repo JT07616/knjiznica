@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalji posudbe</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: main-nav}"></div>
+
+<h1>Detalji posudbe</h1>
+
+<p><strong>ID:</strong> <span th:text="${loan.id}">1</span></p>
+<p><strong>Knjiga:</strong> <span th:text="${loan.book.title}">Naslov knjige</span></p>
+<p><strong>Autor:</strong> <span th:text="${loan.book.author}">Autor</span></p>
+<p><strong>Clan:</strong> <span th:text="|${loan.member.firstName} ${loan.member.lastName}|">Ime Prezime</span></p>
+<p><strong>Email clana:</strong> <span th:text="${loan.member.email}">email@example.com</span></p>
+<p><strong>Datum posudbe:</strong> <span th:text="${loan.loanDate}">2026-01-01</span></p>
+<p><strong>Rok vracanja:</strong> <span th:text="${loan.dueDate}">2026-01-15</span></p>
+<p><strong>Datum vracanja:</strong> <span th:text="${loan.returnDate != null ? loan.returnDate : '-'}">-</span></p>
+<p><strong>Status:</strong> <span th:text="${loan.status}">ACTIVE</span></p>
+
+<p><a th:href="@{/loans}">Povratak na popis</a></p>
+</body>
+</html>
