@@ -11,6 +11,8 @@
 
 <h1>Popis clanova</h1>
 
+<p><a th:href="@{/members/new}">Dodaj novog clana</a></p>
+
 <table>
   <thead>
   <tr>
@@ -33,6 +35,10 @@
     <td th:text="${member.joinedAt}">2026-01-01</td>
     <td>
       <a th:href="@{/members/{id}(id=${member.id})}">Detalji</a>
+      <a th:href="@{/members/{id}/edit(id=${member.id})}">Uredi</a>
+      <form th:action="@{/members/{id}/delete(id=${member.id})}" method="post" style="display:inline;">
+        <button type="submit">Obrisi</button>
+      </form>
     </td>
   </tr>
   </tbody>

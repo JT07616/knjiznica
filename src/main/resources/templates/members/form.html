@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${formTitle}">Forma</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: main-nav}"></div>
+
+<h1 th:text="${formTitle}">Forma</h1>
+
+<form th:action="@{${formAction}}" th:object="${memberForm}" method="post">
+  <div class="alert error" th:if="${#fields.hasAnyErrors()}">
+    <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Greska</p>
+  </div>
+
+  <div>
+    <label>Ime</label>
+    <input type="text" th:field="*{firstName}" th:errorclass="is-invalid">
+    <p class="field-error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+      Greska
+    </p>
+  </div>
+
+  <div>
+    <label>Prezime</label>
+    <input type="text" th:field="*{lastName}" th:errorclass="is-invalid">
+    <p class="field-error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+      Greska
+    </p>
+  </div>
+
+  <div>
+    <label>Email</label>
+    <input type="email" th:field="*{email}" th:errorclass="is-invalid">
+    <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+      Greska
+    </p>
+  </div>
+
+  <div>
+    <label>Telefon</label>
+    <input type="text" th:field="*{phone}" th:errorclass="is-invalid">
+    <p class="field-error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
+      Greska
+    </p>
+  </div>
+
+  <button type="submit">Spremi</button>
+</form>
+
+<p><a th:href="@{/members}">Povratak na popis</a></p>
+</body>
+</html>
