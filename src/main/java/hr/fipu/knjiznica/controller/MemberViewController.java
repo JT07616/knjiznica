@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.util.List;
 
 @Controller
 public class MemberViewController {
@@ -20,8 +21,14 @@ public class MemberViewController {
     }
 
     @GetMapping("/members")
-    public String list(Model model) {
-        model.addAttribute("members", memberService.findAll());
+    public String list(@RequestParam(required = false) String email, Model model) {
+        if (email == null || email.isBlank()) {
+            model.addAttribute("members", memberService.findAll());
+        } else {
+            model.addAttribute("members", List.of(memberService.findByEmail(email)));
+        }
+
+        model.addAttribute("email", email);
         return "members/list";
     }
 
@@ -118,4 +125,6 @@ public class MemberViewController {
 
         return "redirect:/members";
     }
+
+
 }

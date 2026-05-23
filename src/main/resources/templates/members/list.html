@@ -13,6 +13,12 @@
 
 <p><a th:href="@{/members/new}">Dodaj novog clana</a></p>
 
+<form class="search-form" th:action="@{/members}" method="get">
+  <input type="text" name="email" placeholder="Pretrazi po emailu" th:value="${email}">
+  <button type="submit">Pretrazi</button>
+  <a th:href="@{/members}">Ocisti</a>
+</form>
+
 <table>
   <thead>
   <tr>
