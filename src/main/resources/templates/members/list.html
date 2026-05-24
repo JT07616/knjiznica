@@ -2,21 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Clanovi</title>
+  <title>Članovi</title>
   <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
 <body>
 <div th:replace="~{fragments/layout :: main-nav}"></div>
 <div th:replace="~{fragments/layout :: flash-message}"></div>
 
-<h1>Popis clanova</h1>
+<h1>Popis članova</h1>
 
-<p><a th:href="@{/members/new}">Dodaj novog clana</a></p>
+<p><a th:href="@{/members/new}">Dodaj novog člana</a></p>
 
 <form class="search-form" th:action="@{/members}" method="get">
-  <input type="text" name="email" placeholder="Pretrazi po emailu" th:value="${email}">
-  <button type="submit">Pretrazi</button>
-  <a th:href="@{/members}">Ocisti</a>
+  <input type="text" name="email" placeholder="Pretraži po emailu" th:value="${email}">
+  <button type="submit">Pretraži</button>
+  <a th:href="@{/members}">Očisti</a>
 </form>
 
 <table>
@@ -27,7 +27,7 @@
     <th>Prezime</th>
     <th>Email</th>
     <th>Telefon</th>
-    <th>Datum uclanjenja</th>
+    <th>Datum učlanjenja</th>
     <th>Akcije</th>
   </tr>
   </thead>
@@ -43,7 +43,7 @@
       <a th:href="@{/members/{id}(id=${member.id})}">Detalji</a>
       <a th:href="@{/members/{id}/edit(id=${member.id})}">Uredi</a>
       <form th:action="@{/members/{id}/delete(id=${member.id})}" method="post" style="display:inline;">
-        <button type="submit">Obrisi</button>
+        <button type="submit">Obriši</button>
       </form>
     </td>
   </tr>

@@ -15,8 +15,8 @@
 
 <form class="search-form" th:action="@{/books}" method="get">
     <input type="text" name="title" placeholder="Pretrazi po naslovu" th:value="${title}">
-    <button type="submit">Pretrazi</button>
-    <a th:href="@{/books}">Ocisti</a>
+    <button type="submit">Pretraži</button>
+    <a th:href="@{/books}">Očisti</a>
 </form>
 
 <table>
@@ -25,7 +25,7 @@
         <th>ID</th>
         <th>Naslov</th>
         <th>Autor</th>
-        <th>Zanr</th>
+        <th>Žanr</th>
         <th>ISBN</th>
         <th>Godina</th>
         <th>Dostupna</th>
@@ -37,7 +37,7 @@
         <td th:text="${book.id}">1</td>
         <td th:text="${book.title}">Naslov</td>
         <td th:text="${book.author}">Autor</td>
-        <td th:text="${book.genre}">Zanr</td>
+        <td th:text="${book.genre}">Žanr</td>
         <td th:text="${book.isbn}">ISBN</td>
         <td th:text="${book.publishedYear}">2000</td>
         <td th:text="${book.available} ? 'Da' : 'Ne'">Da</td>
@@ -45,7 +45,7 @@
             <a th:href="@{/books/{id}(id=${book.id})}">Detalji</a>
             <a th:href="@{/books/{id}/edit(id=${book.id})}">Uredi</a>
             <form th:action="@{/books/{id}/delete(id=${book.id})}" method="post" style="display:inline;">
-                <button type="submit">Obrisi</button>
+                <button type="submit">Obriši</button>
             </form>
         </td>
     </tr>

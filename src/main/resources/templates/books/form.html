@@ -12,14 +12,14 @@
 
 <form th:action="@{${formAction}}" th:object="${bookForm}" method="post">
   <div class="alert error" th:if="${#fields.hasAnyErrors()}">
-    <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Greska</p>
+    <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Greška</p>
   </div>
 
   <div>
     <label>Naslov</label>
     <input type="text" th:field="*{title}" th:errorclass="is-invalid">
     <p class="field-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
-      Greska
+      Greška
     </p>
   </div>
 
@@ -27,15 +27,15 @@
     <label>Autor</label>
     <input type="text" th:field="*{author}" th:errorclass="is-invalid">
     <p class="field-error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">
-      Greska
+      Greška
     </p>
   </div>
 
   <div>
-    <label>Zanr</label>
+    <label>Žanr</label>
     <input type="text" th:field="*{genre}" th:errorclass="is-invalid">
     <p class="field-error" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">
-      Greska
+      Greška
     </p>
   </div>
 
@@ -43,7 +43,7 @@
     <label>ISBN</label>
     <input type="text" th:field="*{isbn}" th:errorclass="is-invalid">
     <p class="field-error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">
-      Greska
+      Greška
     </p>
   </div>
 
@@ -51,7 +51,7 @@
     <label>Godina izdavanja</label>
     <input type="number" th:field="*{publishedYear}" th:errorclass="is-invalid">
     <p class="field-error" th:if="${#fields.hasErrors('publishedYear')}" th:errors="*{publishedYear}">
-      Greska
+      Greška
     </p>
   </div>
 

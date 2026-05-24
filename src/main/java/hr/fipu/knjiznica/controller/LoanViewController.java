@@ -25,8 +25,14 @@ public class LoanViewController {
     }
 
     @GetMapping("/loans")
-    public String list(Model model) {
-        model.addAttribute("loans", loanService.findAll());
+    public String list(@RequestParam(required = false) String status, Model model) {
+        if (status == null || status.isBlank()) {
+            model.addAttribute("loans", loanService.findAll());
+        } else {
+            model.addAttribute("loans", loanService.findByStatus(status));
+        }
+
+        model.addAttribute("status", status);
         return "loans/list";
     }
 
@@ -35,6 +41,59 @@ public class LoanViewController {
         model.addAttribute("loan", loanService.findById(id));
         return "loans/details";
     }
+
+    @GetMapping("/loans/{id}/edit")
+    public String showEditForm(@PathVariable Integer id, Model model) {
+        var loan = loanService.findById(id);
+
+        LoanRequest form = new LoanRequest();
+        form.setBookId(loan.getBook().getId());
+        form.setMemberId(loan.getMember().getId());
+
+        model.addAttribute("loan", loan);
+        model.addAttribute("loanForm", form);
+        model.addAttribute("members", memberService.findAll());
+
+        return "loans/edit";
+    }
+
+    @PostMapping("/loans/{id}")
+    public String update(
+            @PathVariable Integer id,
+            @Valid @ModelAttribute("loanForm") LoanRequest form,
+            BindingResult bindingResult,
+            Model model,
+            RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("loan", loanService.findById(id));
+            model.addAttribute("members", memberService.findAll());
+            return "loans/edit";
+        }
+
+        loanService.updateMember(id, form.getMemberId());
+        redirectAttributes.addFlashAttribute("message", "Posudba je uspjesno uredjena.");
+
+        return "redirect:/loans";
+    }
+
+    @PostMapping("/loans/{id}/return")
+    public String returnBook(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        loanService.returnBook(id);
+        redirectAttributes.addFlashAttribute("message", "Knjiga je uspjesno vracena.");
+
+        return "redirect:/loans";
+    }
+
+    @PostMapping("/loans/{id}/delete")
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        loanService.delete(id);
+        redirectAttributes.addFlashAttribute("message", "Posudba je uspjesno obrisana.");
+
+        return "redirect:/loans";
+    }
+
+
 
     @GetMapping("/loans/new")
     public String showCreateForm(Model model) {

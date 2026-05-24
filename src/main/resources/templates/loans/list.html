@@ -12,16 +12,21 @@
 <h1>Popis posudbi</h1>
 
 <p><a th:href="@{/loans/new}">Dodaj novu posudbu</a></p>
+<p>
+    <a th:href="@{/loans}">Sve posudbe</a> |
+    <a th:href="@{/loans(status='ACTIVE')}">Aktivne posudbe</a> |
+    <a th:href="@{/loans(status='RETURNED')}">Vraćene posudbe</a>
+</p>
 
 <table>
     <thead>
     <tr>
         <th>ID</th>
         <th>Knjiga</th>
-        <th>Clan</th>
+        <th>Član</th>
         <th>Datum posudbe</th>
-        <th>Rok vracanja</th>
-        <th>Datum vracanja</th>
+        <th>Rok vraćanja</th>
+        <th>Datum vraćanja</th>
         <th>Status</th>
         <th>Akcije</th>
     </tr>
@@ -37,6 +42,18 @@
         <td th:text="${loan.status}">ACTIVE</td>
         <td>
             <a th:href="@{/loans/{id}(id=${loan.id})}">Detalji</a>
+            <a th:if="${loan.status == 'ACTIVE'}" th:href="@{/loans/{id}/edit(id=${loan.id})}">Uredi</a>
+
+            <form th:if="${loan.status == 'ACTIVE'}"
+                  th:action="@{/loans/{id}/return(id=${loan.id})}"
+                  method="post"
+                  style="display:inline;">
+                <button type="submit">Označi kao vraćeno</button>
+            </form>
+
+            <form th:action="@{/loans/{id}/delete(id=${loan.id})}" method="post" style="display:inline;">
+                <button type="submit">Obriši</button>
+            </form>
         </td>
     </tr>
     </tbody>

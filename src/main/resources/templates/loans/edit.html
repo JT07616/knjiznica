@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Uredi posudbu</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: main-nav}"></div>
+
+<h1>Uredi posudbu</h1>
+
+<p><strong>Knjiga:</strong> <span th:text="${loan.book.title}">Naslov knjige</span></p>
+<p><strong>Status:</strong> <span th:text="${loan.status}">ACTIVE</span></p>
+
+<form th:action="@{/loans/{id}(id=${loan.id})}" th:object="${loanForm}" method="post">
+  <input type="hidden" th:field="*{bookId}">
+
+  <div class="alert error" th:if="${#fields.hasAnyErrors()}">
+    <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Greška</p>
+  </div>
+
+  <div>
+    <label>Član</label>
+    <select th:field="*{memberId}" th:errorclass="is-invalid">
+      <option value="">-- Odaberi člana --</option>
+      <option th:each="member : ${members}"
+              th:value="${member.id}"
+              th:text="|${member.firstName} ${member.lastName} (${member.email})|">
+        Član
+      </option>
+    </select>
+    <p class="field-error" th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}">
+      Greška
+    </p>
+  </div>
+
+  <button type="submit">Spremi</button>
+</form>
+
+<p><a th:href="@{/loans}">Povratak na popis</a></p>
+</body>
+</html>

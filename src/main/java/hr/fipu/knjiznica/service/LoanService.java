@@ -14,6 +14,8 @@ public interface LoanService {
 
     Loan returnBook(Integer loanId);
 
+    Loan updateMember(Integer loanId, Integer memberId);
+
     void delete(Integer id);
 
     List<Loan> findByStatus(String status);

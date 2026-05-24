@@ -55,6 +55,10 @@ public class Loan {
         return member;
     }
 
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
     public LocalDate getLoanDate() {
         return loanDate;
     }

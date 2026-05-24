@@ -72,7 +72,29 @@ public class DefaultLoanService implements LoanService {
     @Transactional
     public void delete(Integer id) {
         Loan loan = findById(id);
+
+        if ("ACTIVE".equals(loan.getStatus())) {
+            loan.getBook().setAvailable(true);
+        }
+
         loanRepository.delete(loan);
+    }
+
+    @Override
+    @Transactional
+    public Loan updateMember(Integer loanId, Integer memberId) {
+        Loan loan = findById(loanId);
+
+        if ("RETURNED".equals(loan.getStatus())) {
+            throw new RuntimeException("Vracena posudba se ne moze uredjivati.");
+        }
+
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("Clan nije pronadjen."));
+
+        loan.setMember(member);
+
+        return loanRepository.save(loan);
     }
 
     @Override

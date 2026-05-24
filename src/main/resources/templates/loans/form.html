@@ -12,7 +12,7 @@
 
 <form th:action="@{/loans}" th:object="${loanForm}" method="post">
     <div class="alert error" th:if="${#fields.hasAnyErrors()}">
-        <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Greska</p>
+        <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Greška</p>
     </div>
 
     <div>
@@ -33,15 +33,15 @@
     <div>
         <label>Clan</label>
         <select th:field="*{memberId}" th:errorclass="is-invalid">
-            <option value="">-- Odaberi clana --</option>
+            <option value="">-- Odaberi člana --</option>
             <option th:each="member : ${members}"
                     th:value="${member.id}"
                     th:text="|${member.firstName} ${member.lastName} (${member.email})|">
-                Clan
+                Član
             </option>
         </select>
         <p class="field-error" th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}">
-            Greska
+            Greška
         </p>
     </div>
 

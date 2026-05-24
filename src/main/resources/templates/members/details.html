@@ -8,14 +8,14 @@
 <body>
 <div th:replace="~{fragments/layout :: main-nav}"></div>
 
-<h1>Detalji clana</h1>
+<h1>Detalji člana</h1>
 
 <p><strong>ID:</strong> <span th:text="${member.id}">1</span></p>
 <p><strong>Ime:</strong> <span th:text="${member.firstName}">Ime</span></p>
 <p><strong>Prezime:</strong> <span th:text="${member.lastName}">Prezime</span></p>
 <p><strong>Email:</strong> <span th:text="${member.email}">email@example.com</span></p>
 <p><strong>Telefon:</strong> <span th:text="${member.phone}">Telefon</span></p>
-<p><strong>Datum uclanjenja:</strong> <span th:text="${member.joinedAt}">2026-01-01</span></p>
+<p><strong>Datum učlanjenja:</strong> <span th:text="${member.joinedAt}">2026-01-01</span></p>
 
 <p><a th:href="@{/members}">Povratak na popis</a></p>
 </body>
