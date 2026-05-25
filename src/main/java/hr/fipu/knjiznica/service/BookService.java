@@ -19,4 +19,6 @@ public interface BookService {
     List<Book> searchByTitle(String title);
 
     List<Book> findAvailable();
+
+    long count();
 }

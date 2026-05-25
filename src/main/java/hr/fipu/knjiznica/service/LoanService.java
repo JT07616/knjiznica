@@ -23,4 +23,8 @@ public interface LoanService {
     List<Loan> findByBookId(Integer bookId);
 
     List<Loan> findByMemberId(Integer memberId);
+
+    long count();
+
+    long countActive();
 }

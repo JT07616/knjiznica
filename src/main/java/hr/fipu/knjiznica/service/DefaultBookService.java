@@ -24,7 +24,7 @@ public class DefaultBookService implements BookService {
     @Override
     public Book findById(Integer id) {
         return bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Knjiga nije pronađena."));
+                .orElseThrow(() -> new RuntimeException("Knjiga nije pronadjena."));
     }
 
     @Override
@@ -44,7 +44,6 @@ public class DefaultBookService implements BookService {
         existingBook.setIsbn(book.getIsbn());
         existingBook.setPublishedYear(book.getPublishedYear());
 
-
         return bookRepository.save(existingBook);
     }
 
@@ -57,7 +56,6 @@ public class DefaultBookService implements BookService {
 
     @Override
     public List<Book> searchByTitle(String title) {
-
         return bookRepository.findByTitleContainingIgnoreCase(title);
     }
 
@@ -66,5 +64,8 @@ public class DefaultBookService implements BookService {
         return bookRepository.findByAvailableTrue();
     }
 
-
+    @Override
+    public long count() {
+        return bookRepository.count();
+    }
 }

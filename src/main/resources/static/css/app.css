@@ -34,6 +34,44 @@ h1 {
     margin-top: 0;
 }
 
+.stats {
+    margin: 1.25rem 0;
+}
+
+.stats div {
+    display: inline-block;
+    min-width: 130px;
+    margin: 0 0.5rem 0.5rem 0;
+    padding: 1rem;
+    border: 1px solid #d6e1e6;
+    background-color: #ffffff;
+}
+
+.stats strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #284b63;
+    font-size: 1.8rem;
+}
+
+.quick-links {
+    margin-bottom: 1.5rem;
+}
+
+.quick-links a {
+    display: inline-block;
+    margin: 0 0.35rem 0.5rem 0;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid #2a9d8f;
+    background-color: #ffffff;
+    color: #2a6f67;
+    text-decoration: none;
+}
+
+.quick-links a:hover {
+    background-color: #e7f6f3;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;

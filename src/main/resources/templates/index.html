@@ -12,8 +12,55 @@
 
 <p>Web aplikacija za upravljanje knjigama, članovima i posudbama.</p>
 
-<ul>
-    <li><a th:href="@{/books}">Popis knjiga</a></li>
-</ul>
+<div class="stats">
+    <div>
+        <strong th:text="${bookCount}">0</strong>
+        <span>Knjiga</span>
+    </div>
+    <div>
+        <strong th:text="${memberCount}">0</strong>
+        <span>Članova</span>
+    </div>
+    <div>
+        <strong th:text="${loanCount}">0</strong>
+        <span>Posudbi</span>
+    </div>
+    <div>
+        <strong th:text="${activeLoanCount}">0</strong>
+        <span>Aktivnih posudbi</span>
+    </div>
+</div>
+
+<h2>Brzi pristup</h2>
+
+<div class="quick-links">
+    <a th:href="@{/books}">Popis knjiga</a>
+    <a th:href="@{/members}">Popis Članova</a>
+    <a th:href="@{/loans}">Popis posudbi</a>
+    <a th:href="@{/loans/new}">Nova posudba</a>
+</div>
+
+<h2>Trenutno posuđene knjige</h2>
+
+<p th:if="${!hasBorrowedBooks}">
+    Trenutno nema posuđenih knjiga.
+</p>
+
+<table th:if="${hasBorrowedBooks}">
+    <thead>
+    <tr>
+        <th>Naslov</th>
+        <th>Autor</th>
+        <th>Žanr</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${borrowedBooks}">
+        <td th:text="${book.title}">Naslov</td>
+        <td th:text="${book.author}">Autor</td>
+        <td th:text="${book.genre}">Žanr</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

@@ -17,4 +17,6 @@ public interface MemberService {
     void delete(Integer id);
 
     Member findByEmail(String email);
+
+    long count();
 }

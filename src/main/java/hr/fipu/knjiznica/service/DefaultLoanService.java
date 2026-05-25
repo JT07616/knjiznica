@@ -32,17 +32,17 @@ public class DefaultLoanService implements LoanService {
     @Override
     public Loan findById(Integer id) {
         return loanRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Posudba nije pronađena."));
+                .orElseThrow(() -> new RuntimeException("Posudba nije pronadjena."));
     }
 
     @Override
     @Transactional
     public Loan create(Integer bookId, Integer memberId) {
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new RuntimeException("Knjiga nije pronađena."));
+                .orElseThrow(() -> new RuntimeException("Knjiga nije pronadjena."));
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("Član nije pronađen."));
+                .orElseThrow(() -> new RuntimeException("Clan nije pronadjen."));
 
         if (!book.isAvailable()) {
             throw new RuntimeException("Knjiga trenutno nije dostupna za posudbu.");
@@ -60,7 +60,7 @@ public class DefaultLoanService implements LoanService {
         Loan loan = findById(loanId);
 
         if ("RETURNED".equals(loan.getStatus())) {
-            throw new RuntimeException("Knjiga je već vraćena.");
+            throw new RuntimeException("Knjiga je vec vracena.");
         }
 
         loan.returnLoan();
@@ -86,11 +86,11 @@ public class DefaultLoanService implements LoanService {
         Loan loan = findById(loanId);
 
         if ("RETURNED".equals(loan.getStatus())) {
-            throw new RuntimeException("Vraćena posudba se ne moze uređivati.");
+            throw new RuntimeException("Vracena posudba se ne moze uredjivati.");
         }
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("Član nije pronađen."));
+                .orElseThrow(() -> new RuntimeException("Clan nije pronadjen."));
 
         loan.setMember(member);
 
@@ -110,5 +110,15 @@ public class DefaultLoanService implements LoanService {
     @Override
     public List<Loan> findByMemberId(Integer memberId) {
         return loanRepository.findByMemberId(memberId);
+    }
+
+    @Override
+    public long count() {
+        return loanRepository.count();
+    }
+
+    @Override
+    public long countActive() {
+        return loanRepository.countByStatus("ACTIVE");
     }
 }

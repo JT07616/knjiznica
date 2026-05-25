@@ -9,6 +9,8 @@ public interface LoanRepository extends JpaRepository<Loan, Integer> {
 
     List<Loan> findByStatus(String status);
 
+    long countByStatus(String status);
+
     List<Loan> findByBookId(Integer bookId);
 
     List<Loan> findByMemberId(Integer memberId);
