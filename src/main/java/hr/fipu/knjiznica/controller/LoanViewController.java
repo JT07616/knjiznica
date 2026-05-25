@@ -24,6 +24,11 @@ public class LoanViewController {
         this.memberService = memberService;
     }
 
+    @ModelAttribute("activePage")
+    public String activePage() {
+        return "loans";
+    }
+
     @GetMapping("/loans")
     public String list(@RequestParam(required = false) String status, Model model) {
         if (status == null || status.isBlank()) {
@@ -72,7 +77,7 @@ public class LoanViewController {
         }
 
         loanService.updateMember(id, form.getMemberId());
-        redirectAttributes.addFlashAttribute("message", "Posudba je uspjesno uredjena.");
+        redirectAttributes.addFlashAttribute("message", "Posudba je uspješno uređena.");
 
         return "redirect:/loans";
     }
@@ -80,7 +85,7 @@ public class LoanViewController {
     @PostMapping("/loans/{id}/return")
     public String returnBook(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         loanService.returnBook(id);
-        redirectAttributes.addFlashAttribute("message", "Knjiga je uspjesno vracena.");
+        redirectAttributes.addFlashAttribute("message", "Knjiga je uspješno vraćena.");
 
         return "redirect:/loans";
     }
@@ -88,7 +93,7 @@ public class LoanViewController {
     @PostMapping("/loans/{id}/delete")
     public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         loanService.delete(id);
-        redirectAttributes.addFlashAttribute("message", "Posudba je uspjesno obrisana.");
+        redirectAttributes.addFlashAttribute("message", "Posudba je uspješno obrisana.");
 
         return "redirect:/loans";
     }
@@ -98,8 +103,9 @@ public class LoanViewController {
     @GetMapping("/loans/new")
     public String showCreateForm(Model model) {
         model.addAttribute("loanForm", new LoanRequest());
-        model.addAttribute("books", bookService.findAll());
+        model.addAttribute("books", bookService.findAvailable());
         model.addAttribute("members", memberService.findAll());
+
         return "loans/form";
     }
 
@@ -111,13 +117,13 @@ public class LoanViewController {
             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("books", bookService.findAll());
+            model.addAttribute("books", bookService.findAvailable());
             model.addAttribute("members", memberService.findAll());
             return "loans/form";
         }
 
         loanService.create(form.getBookId(), form.getMemberId());
-        redirectAttributes.addFlashAttribute("message", "Posudba je uspjesno dodana.");
+        redirectAttributes.addFlashAttribute("message", "Posudba je uspješno dodana.");
 
         return "redirect:/loans";
     }

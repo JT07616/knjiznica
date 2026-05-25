@@ -17,4 +17,6 @@ public interface BookService {
     void delete(Integer id);
 
     List<Book> searchByTitle(String title);
+
+    List<Book> findAvailable();
 }

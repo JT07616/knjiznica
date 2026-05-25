@@ -12,14 +12,14 @@
 
 <form th:action="@{${formAction}}" th:object="${memberForm}" method="post">
   <div class="alert error" th:if="${#fields.hasAnyErrors()}">
-    <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Greska</p>
+    <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Greška</p>
   </div>
 
   <div>
     <label>Ime</label>
     <input type="text" th:field="*{firstName}" th:errorclass="is-invalid">
     <p class="field-error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
-      Greska
+      Greška
     </p>
   </div>
 
@@ -27,7 +27,7 @@
     <label>Prezime</label>
     <input type="text" th:field="*{lastName}" th:errorclass="is-invalid">
     <p class="field-error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
-      Greska
+      Greška
     </p>
   </div>
 
@@ -35,7 +35,7 @@
     <label>Email</label>
     <input type="email" th:field="*{email}" th:errorclass="is-invalid">
     <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
-      Greska
+      Greška
     </p>
   </div>
 
@@ -43,7 +43,7 @@
     <label>Telefon</label>
     <input type="text" th:field="*{phone}" th:errorclass="is-invalid">
     <p class="field-error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
-      Greska
+      Greška
     </p>
   </div>
 

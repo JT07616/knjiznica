@@ -11,7 +11,7 @@
 
 <h1>Popis članova</h1>
 
-<p><a th:href="@{/members/new}">Dodaj novog člana</a></p>
+<p><a class="primary-link" th:href="@{/members/new}">Dodaj novog člana</a></p>
 
 <form class="search-form" th:action="@{/members}" method="get">
   <input type="text" name="email" placeholder="Pretraži po emailu" th:value="${email}">
@@ -39,7 +39,7 @@
     <td th:text="${member.email}">email@example.com</td>
     <td th:text="${member.phone}">Telefon</td>
     <td th:text="${member.joinedAt}">2026-01-01</td>
-    <td>
+    <td class="actions">
       <a th:href="@{/members/{id}(id=${member.id})}">Detalji</a>
       <a th:href="@{/members/{id}/edit(id=${member.id})}">Uredi</a>
       <form th:action="@{/members/{id}/delete(id=${member.id})}" method="post" style="display:inline;">

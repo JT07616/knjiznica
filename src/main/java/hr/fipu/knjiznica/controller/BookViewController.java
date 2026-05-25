@@ -19,6 +19,11 @@ public class BookViewController {
         this.bookService = bookService;
     }
 
+    @ModelAttribute("activePage")
+    public String activePage() {
+        return "books";
+    }
+
     @GetMapping("/books")
     public String list(@RequestParam(required = false) String title, Model model) {
         if (title == null || title.isBlank()) {
@@ -67,7 +72,7 @@ public class BookViewController {
         );
 
         bookService.create(book);
-        redirectAttributes.addFlashAttribute("message", "Knjiga je uspjesno dodana.");
+        redirectAttributes.addFlashAttribute("message", "Knjiga je uspješno dodana.");
 
         return "redirect:/books";
     }
@@ -115,7 +120,7 @@ public class BookViewController {
         );
 
         bookService.update(id, book);
-        redirectAttributes.addFlashAttribute("message", "Knjiga je uspjesno uredjena.");
+        redirectAttributes.addFlashAttribute("message", "Knjiga je uspješno uređena.");
 
         return "redirect:/books";
     }
@@ -123,7 +128,7 @@ public class BookViewController {
     @PostMapping("/books/{id}/delete")
     public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         bookService.delete(id);
-        redirectAttributes.addFlashAttribute("message", "Knjiga je uspjesno obrisana.");
+        redirectAttributes.addFlashAttribute("message", "Knjiga je uspješno obrisana.");
 
         return "redirect:/books";
     }

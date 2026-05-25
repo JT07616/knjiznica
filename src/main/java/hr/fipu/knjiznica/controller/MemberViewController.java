@@ -20,6 +20,11 @@ public class MemberViewController {
         this.memberService = memberService;
     }
 
+    @ModelAttribute("activePage")
+    public String activePage() {
+        return "members";
+    }
+
     @GetMapping("/members")
     public String list(@RequestParam(required = false) String email, Model model) {
         if (email == null || email.isBlank()) {
@@ -41,7 +46,7 @@ public class MemberViewController {
     @GetMapping("/members/new")
     public String showCreateForm(Model model) {
         model.addAttribute("memberForm", new MemberRequest());
-        model.addAttribute("formTitle", "Dodaj clana");
+        model.addAttribute("formTitle", "Dodaj člana");
         model.addAttribute("formAction", "/members");
         return "members/form";
     }
@@ -54,7 +59,7 @@ public class MemberViewController {
             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("formTitle", "Dodaj clana");
+            model.addAttribute("formTitle", "Dodaj člana");
             model.addAttribute("formAction", "/members");
             return "members/form";
         }
@@ -67,7 +72,7 @@ public class MemberViewController {
         );
 
         memberService.create(member);
-        redirectAttributes.addFlashAttribute("message", "Clan je uspjesno dodan.");
+        redirectAttributes.addFlashAttribute("message", "Član je uspješno dodan.");
 
         return "redirect:/members";
     }
@@ -84,7 +89,7 @@ public class MemberViewController {
 
         model.addAttribute("memberForm", form);
         model.addAttribute("memberId", id);
-        model.addAttribute("formTitle", "Uredi clana");
+        model.addAttribute("formTitle", "Uredi člana");
         model.addAttribute("formAction", "/members/" + id);
 
         return "members/form";
@@ -100,7 +105,7 @@ public class MemberViewController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("memberId", id);
-            model.addAttribute("formTitle", "Uredi clana");
+            model.addAttribute("formTitle", "Uredi člana");
             model.addAttribute("formAction", "/members/" + id);
             return "members/form";
         }
@@ -113,7 +118,7 @@ public class MemberViewController {
         );
 
         memberService.update(id, member);
-        redirectAttributes.addFlashAttribute("message", "Clan je uspjesno uredjen.");
+        redirectAttributes.addFlashAttribute("message", "Član je uspješno uređen.");
 
         return "redirect:/members";
     }
@@ -121,7 +126,7 @@ public class MemberViewController {
     @PostMapping("/members/{id}/delete")
     public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         memberService.delete(id);
-        redirectAttributes.addFlashAttribute("message", "Clan je uspjesno obrisan.");
+        redirectAttributes.addFlashAttribute("message", "Član je uspješno obrisan.");
 
         return "redirect:/members";
     }

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<nav th:fragment="main-nav">
-    <a th:href="@{/}">Početna</a> |
-    <a th:href="@{/books}">Knjige</a> |
-    <a th:href="@{/members}">Članovi</a> |
-    <a th:href="@{/loans}">Posudbe</a>
+<nav class="main-nav" th:fragment="main-nav">
+    <a th:href="@{/}" th:classappend="${activePage == 'home'} ? 'active'">Početna</a>
+    <a th:href="@{/books}" th:classappend="${activePage == 'books'} ? 'active'">Knjige</a>
+    <a th:href="@{/members}" th:classappend="${activePage == 'members'} ? 'active'">Članovi</a>
+    <a th:href="@{/loans}" th:classappend="${activePage == 'loans'} ? 'active'">Posudbe</a>
 </nav>
 
 <div th:fragment="flash-message">

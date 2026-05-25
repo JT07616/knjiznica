@@ -11,10 +11,10 @@
 
 <h1>Popis knjiga</h1>
 
-<p><a th:href="@{/books/new}">Dodaj novu knjigu</a></p>
+<p><a class="primary-link" th:href="@{/books/new}">Dodaj novu knjigu</a></p>
 
 <form class="search-form" th:action="@{/books}" method="get">
-    <input type="text" name="title" placeholder="Pretrazi po naslovu" th:value="${title}">
+    <input type="text" name="title" placeholder="Pretraži po naslovu" th:value="${title}">
     <button type="submit">Pretraži</button>
     <a th:href="@{/books}">Očisti</a>
 </form>
@@ -41,7 +41,7 @@
         <td th:text="${book.isbn}">ISBN</td>
         <td th:text="${book.publishedYear}">2000</td>
         <td th:text="${book.available} ? 'Da' : 'Ne'">Da</td>
-        <td>
+        <td class="actions">
             <a th:href="@{/books/{id}(id=${book.id})}">Detalji</a>
             <a th:href="@{/books/{id}/edit(id=${book.id})}">Uredi</a>
             <form th:action="@{/books/{id}/delete(id=${book.id})}" method="post" style="display:inline;">
