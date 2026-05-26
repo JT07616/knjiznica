@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import java.util.List;
 
 @Controller
 public class MemberViewController {
@@ -30,7 +29,7 @@ public class MemberViewController {
         if (email == null || email.isBlank()) {
             model.addAttribute("members", memberService.findAll());
         } else {
-            model.addAttribute("members", List.of(memberService.findByEmail(email)));
+            model.addAttribute("members", memberService.searchByEmail(email));
         }
 
         model.addAttribute("email", email);

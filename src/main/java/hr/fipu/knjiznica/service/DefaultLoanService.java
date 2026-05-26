@@ -32,17 +32,17 @@ public class DefaultLoanService implements LoanService {
     @Override
     public Loan findById(Integer id) {
         return loanRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Posudba nije pronadjena."));
+                .orElseThrow(() -> new RuntimeException("Posudba nije pronađena."));
     }
 
     @Override
     @Transactional
     public Loan create(Integer bookId, Integer memberId) {
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new RuntimeException("Knjiga nije pronadjena."));
+                .orElseThrow(() -> new RuntimeException("Knjiga nije pronađena."));
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("Clan nije pronadjen."));
+                .orElseThrow(() -> new RuntimeException("Član nije pronađen."));
 
         if (!book.isAvailable()) {
             throw new RuntimeException("Knjiga trenutno nije dostupna za posudbu.");
@@ -59,8 +59,8 @@ public class DefaultLoanService implements LoanService {
     public Loan returnBook(Integer loanId) {
         Loan loan = findById(loanId);
 
-        if ("RETURNED".equals(loan.getStatus())) {
-            throw new RuntimeException("Knjiga je vec vracena.");
+        if (Loan.STATUS_RETURNED.equals(loan.getStatus())) {
+            throw new RuntimeException("Knjiga je već vraćena.");
         }
 
         loan.returnLoan();
@@ -73,7 +73,7 @@ public class DefaultLoanService implements LoanService {
     public void delete(Integer id) {
         Loan loan = findById(id);
 
-        if ("ACTIVE".equals(loan.getStatus())) {
+        if (Loan.STATUS_ACTIVE.equals(loan.getStatus())) {
             loan.getBook().setAvailable(true);
         }
 
@@ -85,12 +85,12 @@ public class DefaultLoanService implements LoanService {
     public Loan updateMember(Integer loanId, Integer memberId) {
         Loan loan = findById(loanId);
 
-        if ("RETURNED".equals(loan.getStatus())) {
-            throw new RuntimeException("Vracena posudba se ne moze uredjivati.");
+        if (Loan.STATUS_RETURNED.equals(loan.getStatus())) {
+            throw new RuntimeException("Vraćena posudba se ne može uređivati.");
         }
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("Clan nije pronadjen."));
+                .orElseThrow(() -> new RuntimeException("Član nije pronađen."));
 
         loan.setMember(member);
 
@@ -119,6 +119,6 @@ public class DefaultLoanService implements LoanService {
 
     @Override
     public long countActive() {
-        return loanRepository.countByStatus("ACTIVE");
+        return loanRepository.countByStatus(Loan.STATUS_ACTIVE);
     }
 }

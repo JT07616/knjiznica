@@ -132,7 +132,16 @@ select {
 
 button {
     padding: 0.25rem 0.5rem;
+    border: 1px solid #999;
+    background-color: #f7f7f7;
+    color: #222;
     cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+}
+
+button:hover {
+    background-color: #e9f1f5;
 }
 
 .search-form {
@@ -177,7 +186,9 @@ button {
 }
 
 .actions a,
-.actions button {
+.actions button,
+.button-link,
+button.danger-link {
     display: inline-block;
     margin-right: 0.25rem;
     padding: 0.25rem 0.5rem;
@@ -187,9 +198,21 @@ button {
     text-decoration: none;
     font-size: 0.9rem;
     cursor: pointer;
+    font-family: Arial, sans-serif;
 }
 
 .actions a:hover,
-.actions button:hover {
+.actions button:hover,
+.button-link:hover {
     background-color: #e9f1f5;
+}
+
+.danger-link {
+    border-color: #c76b6b;
+    background-color: #fff5f5;
+    color: #8a1f1f;
+}
+
+.danger-link:hover {
+    background-color: #ffe5e5;
 }

@@ -15,8 +15,8 @@
 
 <div class="filter-links">
     <a th:href="@{/loans}">Sve posudbe</a>
-    <a th:href="@{/loans(status='ACTIVE')}">Aktivne posudbe</a>
-    <a th:href="@{/loans(status='RETURNED')}">Vraćene posudbe</a>
+    <a th:href="@{/loans(status='Aktivno')}">Aktivne posudbe</a>
+    <a th:href="@{/loans(status='Vraćeno')}">Vraćene posudbe</a>
 </div>
 
 <table>
@@ -40,19 +40,19 @@
         <td th:text="${loan.loanDate}">2026-01-01</td>
         <td th:text="${loan.dueDate}">2026-01-15</td>
         <td th:text="${loan.returnDate != null ? loan.returnDate : '-'}">-</td>
-        <td th:text="${loan.status}">ACTIVE</td>
+        <td th:text="${loan.status}">Aktivno</td>
         <td class="actions">
             <a th:href="@{/loans/{id}(id=${loan.id})}">Detalji</a>
-            <a th:if="${loan.status == 'ACTIVE'}" th:href="@{/loans/{id}/edit(id=${loan.id})}">Uredi</a>
+            <a th:if="${loan.status == 'Aktivno'}" th:href="@{/loans/{id}/edit(id=${loan.id})}">Uredi</a>
 
-            <form th:if="${loan.status == 'ACTIVE'}"
+            <form th:if="${loan.status == 'Aktivno'}"
                   th:action="@{/loans/{id}/return(id=${loan.id})}"
                   method="post"
                   style="display:inline;">
                 <button type="submit">Označi kao vraćeno</button>
             </form>
 
-            <a th:href="@{/loans/{id}/delete(id=${loan.id})}">Obriši</a>
+            <a class="danger-link" th:href="@{/loans/{id}/delete(id=${loan.id})}">Obriši</a>
         </td>
     </tr>
     </tbody>

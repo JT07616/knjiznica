@@ -34,7 +34,7 @@ public class HomeController {
     public String home(Model model) {
         List<Book> borrowedBooks = loanService.findAll()
                 .stream()
-                .filter(loan -> "ACTIVE".equals(loan.getStatus()))
+                .filter(loan -> Loan.STATUS_ACTIVE.equals(loan.getStatus()))
                 .map(Loan::getBook)
                 .toList();
 

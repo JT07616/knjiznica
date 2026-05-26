@@ -8,8 +8,8 @@ public class LoanRequest {
     @Positive(message = "ID knjige mora biti pozitivan broj.")
     private Integer bookId;
 
-    @NotNull(message = "ID clana je obavezan.")
-    @Positive(message = "ID clana mora biti pozitivan broj.")
+    @NotNull(message = "ID člana je obavezan.")
+    @Positive(message = "ID člana mora biti pozitivan broj.")
     private Integer memberId;
 
     public Integer getBookId() {

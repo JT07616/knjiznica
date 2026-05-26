@@ -8,6 +8,9 @@ import java.time.LocalDate;
 @Table(name = "loan")
 public class Loan {
 
+    public static final String STATUS_ACTIVE = "Aktivno";
+    public static final String STATUS_RETURNED = "Vraćeno";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,7 +33,7 @@ public class Loan {
     private LocalDate returnDate;
 
     @Column(nullable = false, length = 20)
-    private String status = "ACTIVE";
+    private String status = STATUS_ACTIVE;
 
     protected Loan() {
     }
@@ -40,7 +43,7 @@ public class Loan {
         this.member = member;
         this.loanDate = LocalDate.now();
         this.dueDate = LocalDate.now().plusDays(14);
-        this.status = "ACTIVE";
+        this.status = STATUS_ACTIVE;
     }
 
     public Integer getId() {
@@ -77,7 +80,7 @@ public class Loan {
 
     public void returnLoan() {
         this.returnDate = LocalDate.now();
-        this.status = "RETURNED";
+        this.status = STATUS_RETURNED;
         this.book.setAvailable(true);
     }
 }

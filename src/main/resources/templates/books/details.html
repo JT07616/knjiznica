@@ -19,8 +19,8 @@
 <p><strong>Dostupna:</strong> <span th:text="${book.available} ? 'Da' : 'Ne'">Da</span></p>
 
 <p>
-  <a th:href="@{/books/{id}/edit(id=${book.id})}">Uredi</a>
-  <a th:href="@{/books}">Povratak na popis</a>
+  <a class="button-link" th:href="@{/books/{id}/edit(id=${book.id})}">Uredi</a>
+  <a class="button-link" th:href="@{/books}">Povratak na popis</a>
 </p>
 </body>
 </html>

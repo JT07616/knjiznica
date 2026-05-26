@@ -5,25 +5,25 @@ import jakarta.validation.constraints.*;
 public class BookRequest {
 
     @NotBlank(message = "Naslov knjige je obavezan.")
-    @Size(max = 100, message = "Naslov moze imati najvise 100 znakova.")
+    @Size(max = 100, message = "Naslov moze imati najviše 100 znakova.")
     private String title;
 
     @NotBlank(message = "Autor knjige je obavezan.")
-    @Size(max = 100, message = "Autor moze imati najvise 100 znakova.")
+    @Size(max = 100, message = "Autor moze imati najviše 100 znakova.")
     private String author;
 
-    @NotBlank(message = "Zanr knjige je obavezan.")
-    @Size(max = 50, message = "Zanr moze imati najvise 50 znakova.")
+    @NotBlank(message = "Žanr knjige je obavezan.")
+    @Size(max = 50, message = "Žanr može imati najviše 50 znakova.")
     private String genre;
 
     @NotBlank(message = "ISBN je obavezan.")
-    @Size(max = 20, message = "ISBN moze imati najvise 20 znakova.")
+    @Size(max = 20, message = "ISBN može imati najviše 20 znakova.")
     @Pattern(regexp = "^[0-9-]+$", message = "ISBN smije sadrzavati samo brojeve i crtice.")
     private String isbn;
 
     @NotNull(message = "Godina izdavanja je obavezna.")
-    @Min(value = 1, message = "Godina izdavanja mora biti veca od 0.")
-    @Max(value = 2026, message = "Godina izdavanja ne moze biti u buducnosti.")
+    @Min(value = 1, message = "Godina izdavanja mora biti veća od 0.")
+    @Max(value = 2026, message = "Godina izdavanja ne može biti u budućnosti.")
     private Integer publishedYear;
 
     public String getTitle() {

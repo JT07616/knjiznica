@@ -18,5 +18,7 @@ public interface MemberService {
 
     Member findByEmail(String email);
 
+    List<Member> searchByEmail(String email);
+
     long count();
 }

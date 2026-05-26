@@ -24,12 +24,12 @@
 
 <p>
   <strong>Status:</strong>
-  <span th:text="${loan.status}">ACTIVE</span>
+  <span th:text="${loan.status}">Aktivno</span>
 </p>
 
 <form th:action="@{/loans/{id}/delete(id=${loan.id})}" method="post">
-  <button type="submit">Potvrdi brisanje</button>
-  <a th:href="@{/loans}">Odustani</a>
+  <button class="danger-link" type="submit">Potvrdi brisanje</button>
+  <a class="button-link" th:href="@{/loans}">Odustani</a>
 </form>
 
 <div class="alert error delete-error" th:if="${errorMessage}" th:text="${errorMessage}">

@@ -10,9 +10,6 @@
 
 <h1>Uredi posudbu</h1>
 
-<p><strong>Knjiga:</strong> <span th:text="${loan.book.title}">Naslov knjige</span></p>
-<p><strong>Status:</strong> <span th:text="${loan.status}">ACTIVE</span></p>
-
 <form th:action="@{/loans/{id}(id=${loan.id})}" th:object="${loanForm}" method="post">
   <input type="hidden" th:field="*{bookId}">
 
@@ -21,7 +18,17 @@
   </div>
 
   <div>
-    <label>Član</label>
+    <label>Knjiga:</label>
+    <span th:text="${loan.book.title}">Naslov knjige</span>
+  </div>
+
+  <div>
+    <label>Status:</label>
+    <span th:text="${loan.status}">Aktivno</span>
+  </div>
+
+  <div>
+    <label>&#268;lan:</label>
     <select th:field="*{memberId}" th:errorclass="is-invalid">
       <option value="">-- Odaberi člana --</option>
       <option th:each="member : ${members}"
@@ -36,8 +43,7 @@
   </div>
 
   <button type="submit">Spremi</button>
+  <a class="button-link" th:href="@{/loans}">Povratak na popis</a>
 </form>
-
-<p><a th:href="@{/loans}">Povratak na popis</a></p>
 </body>
 </html>

@@ -18,8 +18,8 @@
 <p><strong>Datum posudbe:</strong> <span th:text="${loan.loanDate}">2026-01-01</span></p>
 <p><strong>Rok vraćanja:</strong> <span th:text="${loan.dueDate}">2026-01-15</span></p>
 <p><strong>Datum vraćanja:</strong> <span th:text="${loan.returnDate != null ? loan.returnDate : '-'}">-</span></p>
-<p><strong>Status:</strong> <span th:text="${loan.status}">ACTIVE</span></p>
+<p><strong>Status:</strong> <span th:text="${loan.status}">Aktivno</span></p>
 
-<p><a th:href="@{/loans}">Povratak na popis</a></p>
+<p><a class="button-link" th:href="@{/loans}">Povratak na popis</a></p>
 </body>
 </html>

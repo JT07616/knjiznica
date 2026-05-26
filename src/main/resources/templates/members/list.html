@@ -16,7 +16,7 @@
 <form class="search-form" th:action="@{/members}" method="get">
   <input type="text" name="email" placeholder="Pretraži po emailu" th:value="${email}">
   <button type="submit">Pretraži</button>
-  <a th:href="@{/members}">Očisti</a>
+  <a class="button-link" th:href="@{/members}">Očisti</a>
 </form>
 
 <table>
@@ -42,7 +42,7 @@
     <td class="actions">
       <a th:href="@{/members/{id}(id=${member.id})}">Detalji</a>
       <a th:href="@{/members/{id}/edit(id=${member.id})}">Uredi</a>
-      <a th:href="@{/members/{id}/delete(id=${member.id})}">Obriši</a>
+      <a class="danger-link" th:href="@{/members/{id}/delete(id=${member.id})}">Obriši</a>
     </td>
   </tr>
   </tbody>

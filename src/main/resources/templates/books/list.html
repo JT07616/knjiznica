@@ -16,7 +16,7 @@
 <form class="search-form" th:action="@{/books}" method="get">
     <input type="text" name="title" placeholder="Pretraži po naslovu" th:value="${title}">
     <button type="submit">Pretraži</button>
-    <a th:href="@{/books}">Očisti</a>
+    <a class="button-link" th:href="@{/books}">Očisti</a>
 </form>
 
 <table>
@@ -44,7 +44,7 @@
         <td class="actions">
             <a th:href="@{/books/{id}(id=${book.id})}">Detalji</a>
             <a th:href="@{/books/{id}/edit(id=${book.id})}">Uredi</a>
-            <a th:href="@{/books/{id}/delete(id=${book.id})}">Obriši</a>
+            <a class="danger-link" th:href="@{/books/{id}/delete(id=${book.id})}">Obriši</a>
         </td>
     </tr>
     </tbody>

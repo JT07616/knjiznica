@@ -20,7 +20,7 @@
     </div>
 
     <div>
-        <label>Knjiga</label>
+        <label>Knjiga:</label>
         <select th:field="*{bookId}" th:errorclass="is-invalid">
             <option value="">-- Odaberi knjigu --</option>
             <option th:each="book : ${books}"
@@ -35,7 +35,7 @@
     </div>
 
     <div>
-        <label>Član</label>
+        <label>Član:</label>
         <select th:field="*{memberId}" th:errorclass="is-invalid">
             <option value="">-- Odaberi člana --</option>
             <option th:each="member : ${members}"
@@ -50,8 +50,7 @@
     </div>
 
     <button type="submit" th:disabled="${#lists.isEmpty(books)}">Spremi</button>
+    <a class="button-link" th:href="@{/loans}">Povratak na popis</a>
 </form>
-
-<p><a th:href="@{/loans}">Povratak na popis</a></p>
 </body>
 </html>

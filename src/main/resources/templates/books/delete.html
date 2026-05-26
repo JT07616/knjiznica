@@ -23,8 +23,8 @@
 </p>
 
 <form th:action="@{/books/{id}/delete(id=${book.id})}" method="post">
-  <button type="submit">Potvrdi brisanje</button>
-  <a th:href="@{/books}">Odustani</a>
+  <button class="danger-link" type="submit">Potvrdi brisanje</button>
+  <a class="button-link" th:href="@{/books}">Odustani</a>
 </form>
 
 <div class="alert error delete-error" th:if="${errorMessage}" th:text="${errorMessage}">
