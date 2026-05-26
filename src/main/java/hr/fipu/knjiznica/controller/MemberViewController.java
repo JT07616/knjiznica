@@ -123,12 +123,23 @@ public class MemberViewController {
         return "redirect:/members";
     }
 
-    @PostMapping("/members/{id}/delete")
-    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
-        memberService.delete(id);
-        redirectAttributes.addFlashAttribute("message", "Član je uspješno obrisan.");
+    @GetMapping("/members/{id}/delete")
+    public String showDeleteConfirmation(@PathVariable Integer id, Model model) {
+        model.addAttribute("member", memberService.findById(id));
+        return "members/delete";
+    }
 
-        return "redirect:/members";
+    @PostMapping("/members/{id}/delete")
+    public String delete(@PathVariable Integer id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            memberService.delete(id);
+            redirectAttributes.addFlashAttribute("message", "Član je uspješno obrisan.");
+            return "redirect:/members";
+        } catch (RuntimeException e) {
+            model.addAttribute("member", memberService.findById(id));
+            model.addAttribute("errorMessage", e.getMessage());
+            return "members/delete";
+        }
     }
 
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Brisanje posudbe</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: main-nav}"></div>
+
+<h1>Brisanje posudbe</h1>
+
+<p>Jeste li sigurni da želite obrisati ovu posudbu?</p>
+
+<p>
+  <strong>Knjiga:</strong>
+  <span th:text="${loan.book.title}">Naslov knjige</span>
+</p>
+
+<p>
+  <strong>Član:</strong>
+  <span th:text="|${loan.member.firstName} ${loan.member.lastName}|">Ime Prezime</span>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <span th:text="${loan.status}">ACTIVE</span>
+</p>
+
+<form th:action="@{/loans/{id}/delete(id=${loan.id})}" method="post">
+  <button type="submit">Potvrdi brisanje</button>
+  <a th:href="@{/loans}">Odustani</a>
+</form>
+
+<div class="alert error delete-error" th:if="${errorMessage}" th:text="${errorMessage}">
+  Poruka greške
+</div>
+</body>
+</html>

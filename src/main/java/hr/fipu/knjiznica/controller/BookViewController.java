@@ -125,12 +125,23 @@ public class BookViewController {
         return "redirect:/books";
     }
 
-    @PostMapping("/books/{id}/delete")
-    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
-        bookService.delete(id);
-        redirectAttributes.addFlashAttribute("message", "Knjiga je uspješno obrisana.");
+    @GetMapping("/books/{id}/delete")
+    public String showDeleteConfirmation(@PathVariable Integer id, Model model) {
+        model.addAttribute("book", bookService.findById(id));
+        return "books/delete";
+    }
 
-        return "redirect:/books";
+    @PostMapping("/books/{id}/delete")
+    public String delete(@PathVariable Integer id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            bookService.delete(id);
+            redirectAttributes.addFlashAttribute("message", "Knjiga je uspješno obrisana.");
+            return "redirect:/books";
+        } catch (RuntimeException e) {
+            model.addAttribute("book", bookService.findById(id));
+            model.addAttribute("errorMessage", e.getMessage());
+            return "books/delete";
+        }
     }
 
 

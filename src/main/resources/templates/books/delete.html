@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Brisanje knjige</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: main-nav}"></div>
+
+<h1>Brisanje knjige</h1>
+
+<p>Jeste li sigurni da želite obrisati ovu knjigu?</p>
+
+<p>
+  <strong>Naslov:</strong>
+  <span th:text="${book.title}">Naslov</span>
+</p>
+
+<p>
+  <strong>Autor:</strong>
+  <span th:text="${book.author}">Autor</span>
+</p>
+
+<form th:action="@{/books/{id}/delete(id=${book.id})}" method="post">
+  <button type="submit">Potvrdi brisanje</button>
+  <a th:href="@{/books}">Odustani</a>
+</form>
+
+<div class="alert error delete-error" th:if="${errorMessage}" th:text="${errorMessage}">
+  Poruka greške
+</div>
+</body>
+</html>

@@ -2,6 +2,7 @@ package hr.fipu.knjiznica.service;
 
 import hr.fipu.knjiznica.model.Book;
 import hr.fipu.knjiznica.repository.BookRepository;
+import hr.fipu.knjiznica.repository.LoanRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,9 +12,11 @@ import java.util.List;
 public class DefaultBookService implements BookService {
 
     private final BookRepository bookRepository;
+    private final LoanRepository loanRepository;
 
-    public DefaultBookService(BookRepository bookRepository) {
+    public DefaultBookService(BookRepository bookRepository, LoanRepository loanRepository) {
         this.bookRepository = bookRepository;
+        this.loanRepository = loanRepository;
     }
 
     @Override
@@ -51,6 +54,11 @@ public class DefaultBookService implements BookService {
     @Transactional
     public void delete(Integer id) {
         Book book = findById(id);
+
+        if (!loanRepository.findByBookId(id).isEmpty()) {
+            throw new RuntimeException("Knjiga se ne može obrisati jer ima evidentirane posudbe.");
+        }
+
         bookRepository.delete(book);
     }
 

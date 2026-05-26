@@ -52,9 +52,7 @@
                 <button type="submit">Označi kao vraćeno</button>
             </form>
 
-            <form th:action="@{/loans/{id}/delete(id=${loan.id})}" method="post" style="display:inline;">
-                <button type="submit">Obriši</button>
-            </form>
+            <a th:href="@{/loans/{id}/delete(id=${loan.id})}">Obriši</a>
         </td>
     </tr>
     </tbody>

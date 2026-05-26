@@ -103,6 +103,10 @@ th {
     background-color: #fff5f5;
 }
 
+.delete-error {
+    margin-top: 1rem;
+}
+
 .field-error {
     color: #b00020;
     font-size: 0.9rem;

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Brisanje člana</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: main-nav}"></div>
+
+<h1>Brisanje člana</h1>
+
+<p>Jeste li sigurni da želite obrisati ovog člana?</p>
+
+<p>
+  <strong>Ime i prezime:</strong>
+  <span th:text="|${member.firstName} ${member.lastName}|">Ime Prezime</span>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <span th:text="${member.email}">email@example.com</span>
+</p>
+
+<form th:action="@{/members/{id}/delete(id=${member.id})}" method="post">
+  <button type="submit">Potvrdi brisanje</button>
+  <a th:href="@{/members}">Odustani</a>
+</form>
+
+<div class="alert error delete-error" th:if="${errorMessage}" th:text="${errorMessage}">
+  Poruka greške
+</div>
+</body>
+</html>

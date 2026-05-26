@@ -1,6 +1,7 @@
 package hr.fipu.knjiznica.service;
 
 import hr.fipu.knjiznica.model.Member;
+import hr.fipu.knjiznica.repository.LoanRepository;
 import hr.fipu.knjiznica.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,9 +12,11 @@ import java.util.List;
 public class DefaultMemberService implements MemberService {
 
     private final MemberRepository memberRepository;
+    private final LoanRepository loanRepository;
 
-    public DefaultMemberService(MemberRepository memberRepository) {
+    public DefaultMemberService(MemberRepository memberRepository, LoanRepository loanRepository) {
         this.memberRepository = memberRepository;
+        this.loanRepository = loanRepository;
     }
 
     @Override
@@ -50,6 +53,11 @@ public class DefaultMemberService implements MemberService {
     @Transactional
     public void delete(Integer id) {
         Member member = findById(id);
+
+        if (!loanRepository.findByMemberId(id).isEmpty()) {
+            throw new RuntimeException("Član se ne može obrisati jer ima evidentirane posudbe.");
+        }
+
         memberRepository.delete(member);
     }
 

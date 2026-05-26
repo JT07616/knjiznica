@@ -44,9 +44,7 @@
         <td class="actions">
             <a th:href="@{/books/{id}(id=${book.id})}">Detalji</a>
             <a th:href="@{/books/{id}/edit(id=${book.id})}">Uredi</a>
-            <form th:action="@{/books/{id}/delete(id=${book.id})}" method="post" style="display:inline;">
-                <button type="submit">Obriši</button>
-            </form>
+            <a th:href="@{/books/{id}/delete(id=${book.id})}">Obriši</a>
         </td>
     </tr>
     </tbody>

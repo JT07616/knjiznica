@@ -90,12 +90,23 @@ public class LoanViewController {
         return "redirect:/loans";
     }
 
-    @PostMapping("/loans/{id}/delete")
-    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
-        loanService.delete(id);
-        redirectAttributes.addFlashAttribute("message", "Posudba je uspješno obrisana.");
+    @GetMapping("/loans/{id}/delete")
+    public String showDeleteConfirmation(@PathVariable Integer id, Model model) {
+        model.addAttribute("loan", loanService.findById(id));
+        return "loans/delete";
+    }
 
-        return "redirect:/loans";
+    @PostMapping("/loans/{id}/delete")
+    public String delete(@PathVariable Integer id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            loanService.delete(id);
+            redirectAttributes.addFlashAttribute("message", "Posudba je uspješno obrisana.");
+            return "redirect:/loans";
+        } catch (RuntimeException e) {
+            model.addAttribute("loan", loanService.findById(id));
+            model.addAttribute("errorMessage", e.getMessage());
+            return "loans/delete";
+        }
     }
 
 
