@@ -13,10 +13,6 @@
 <form th:action="@{/loans/{id}(id=${loan.id})}" th:object="${loanForm}" method="post">
   <input type="hidden" th:field="*{bookId}">
 
-  <div class="alert error" th:if="${#fields.hasAnyErrors()}">
-    <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Greška</p>
-  </div>
-
   <div>
     <label>Knjiga:</label>
     <span th:text="${loan.book.title}">Naslov knjige</span>

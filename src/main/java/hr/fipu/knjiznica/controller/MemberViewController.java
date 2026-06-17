@@ -70,7 +70,14 @@ public class MemberViewController {
                 form.getPhone()
         );
 
-        memberService.create(member);
+        try {
+            memberService.create(member);
+        } catch (RuntimeException e) {
+            bindingResult.rejectValue("email", "duplicate", e.getMessage());
+            model.addAttribute("formTitle", "Dodaj člana");
+            model.addAttribute("formAction", "/members");
+            return "members/form";
+        }
         redirectAttributes.addFlashAttribute("message", "Član je uspješno dodan.");
 
         return "redirect:/members";
@@ -116,7 +123,15 @@ public class MemberViewController {
                 form.getPhone()
         );
 
-        memberService.update(id, member);
+        try {
+            memberService.update(id, member);
+        } catch (RuntimeException e) {
+            bindingResult.rejectValue("email", "duplicate", e.getMessage());
+            model.addAttribute("memberId", id);
+            model.addAttribute("formTitle", "Uredi člana");
+            model.addAttribute("formAction", "/members/" + id);
+            return "members/form";
+        }
         redirectAttributes.addFlashAttribute("message", "Član je uspješno uređen.");
 
         return "redirect:/members";

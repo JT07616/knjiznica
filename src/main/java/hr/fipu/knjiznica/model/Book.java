@@ -19,7 +19,7 @@ public class Book {
     @Column(nullable = false, length = 50)
     private String genre;
 
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(nullable = false, length = 20)
     private String isbn;
 
     @Column(name = "published_year", nullable = false)

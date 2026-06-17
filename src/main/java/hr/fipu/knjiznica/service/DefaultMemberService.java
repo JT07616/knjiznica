@@ -33,6 +33,10 @@ public class DefaultMemberService implements MemberService {
     @Override
     @Transactional
     public Member create(Member member) {
+        if (memberRepository.existsByEmail(member.getEmail())) {
+            throw new RuntimeException("Član s tim emailom već postoji.");
+        }
+
         return memberRepository.save(member);
     }
 
@@ -40,6 +44,10 @@ public class DefaultMemberService implements MemberService {
     @Transactional
     public Member update(Integer id, Member member) {
         Member existingMember = findById(id);
+
+        if (memberRepository.existsByEmailAndIdNot(member.getEmail(), id)) {
+            throw new RuntimeException("Član s tim emailom već postoji.");
+        }
 
         existingMember.setFirstName(member.getFirstName());
         existingMember.setLastName(member.getLastName());

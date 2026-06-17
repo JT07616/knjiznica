@@ -72,6 +72,7 @@ public class BookViewController {
         );
 
         bookService.create(book);
+
         redirectAttributes.addFlashAttribute("message", "Knjiga je uspješno dodana.");
 
         return "redirect:/books";
@@ -120,6 +121,7 @@ public class BookViewController {
         );
 
         bookService.update(id, book);
+
         redirectAttributes.addFlashAttribute("message", "Knjiga je uspješno uređena.");
 
         return "redirect:/books";
@@ -143,6 +145,4 @@ public class BookViewController {
             return "books/delete";
         }
     }
-
-
 }

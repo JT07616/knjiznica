@@ -11,10 +11,6 @@
 <h1 th:text="${formTitle}">Forma</h1>
 
 <form th:action="@{${formAction}}" th:object="${memberForm}" method="post">
-  <div class="alert error" th:if="${#fields.hasAnyErrors()}">
-    <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Greška</p>
-  </div>
-
   <div>
     <label>Ime:</label>
     <input type="text" th:field="*{firstName}" th:errorclass="is-invalid">

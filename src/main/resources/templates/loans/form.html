@@ -15,10 +15,6 @@
 </p>
 
 <form th:action="@{/loans}" th:object="${loanForm}" method="post">
-    <div class="alert error" th:if="${#fields.hasAnyErrors()}">
-        <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Greška</p>
-    </div>
-
     <div>
         <label>Knjiga:</label>
         <select th:field="*{bookId}" th:errorclass="is-invalid">
